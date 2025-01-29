@@ -1,5 +1,5 @@
 # Exercise-01d-Inky-Misc
 
-# Your Name
+# Ben Kruggel
 
-# Your Github username
+# BenKruggel
