@@ -13,9 +13,7 @@ This exercise will demonstrate the following in the example video:
 */
 
 
-VAR time = 0 //  0 Morning, 1 Noon, 2 Night
-
-
+VAR time = -1 //  0 Morning, 1 Noon, 2 Night
 
 
 -> seashore
@@ -23,17 +21,45 @@ VAR time = 0 //  0 Morning, 1 Noon, 2 Night
 == seashore ==
 You are sitting on the beach. 
 
-+ [Wait] -> seashore
+It is {advance_time()}
+
+
++ [Stroll down the beach] -> beach2
 -> DONE
 
 == beach2 ==
 This is further down the beach.
 
-+ [Move back up the beach] -> seashore
+It is {advance_time()}
+* {time == 1} [Pick up some seashells] -> shells
++ [Stroll back up the beach] -> seashore
++ [Stroll further down the beach] -> beach3
+
+== beach3 ==
+This is even further down the beach. There is a giant pile of driftwood. 
+
+It is {advance_time()}
++ [Pick up some driftwood] -> driftwood
++ [Stroll back up the beach] -> beach2
++ {driftwood} [Build a boat] ->boat_build
 
 == shells ==
 You pick up the shells
 -> beach2
+
+== driftwood ==
+{You pick up the driftwood|You pick up more driftwood|You pick up even more driftwood}
+-> beach3
+
+== boat_build ==
+You build a boat out of all the driftwood.
++ [Go back] -> beach3
++ [Sail out to sea] -> sailing
+
+== sailing ==
+You sail out to sea. Much adventure awaits!
+-> END
+
 
 == function advance_time ==
 
@@ -43,7 +69,7 @@ You pick up the shells
         - time > 2:
             ~ time = 0
     }    
-    /*
+    
     {    
         - time == 0:
             ~ return "Morning"
@@ -55,7 +81,7 @@ You pick up the shells
             ~ return "Night"
     
     }
-    */
+    
     
         
     ~ return time
